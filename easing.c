@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.c                                           :+:      :+:    :+:   */
+/*   easing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aindjare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 11:12:41 by aindjare          #+#    #+#             */
-/*   Updated: 2024/07/15 11:08:47 by aindjare         ###   ########.fr       */
+/*   Created: 2024/07/15 11:05:36 by aindjare          #+#    #+#             */
+/*   Updated: 2024/07/15 11:05:42 by aindjare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memory_set(void *region, unsigned int size, unsigned char byte)
+double	ease_out_quad(double x)
 {
-	unsigned int	i;
-
-	i = 0;
-	if (region)
-		while (i < size)
-			((unsigned char *)region)[i++] = byte;
-	return (region);
-}
-
-void	*memory_zero(void *region, unsigned int size)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (region)
-		while (i < size)
-			((unsigned char *)region)[i++] = '\0';
-	return (region);
+	return (1 - (1 - x) * (1 - x));
 }

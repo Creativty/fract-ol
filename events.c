@@ -6,7 +6,7 @@
 /*   By: aindjare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:58:09 by aindjare          #+#    #+#             */
-/*   Updated: 2024/06/10 13:13:34 by aindjare         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:02:12 by aindjare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	prog_close(t_state *state)
 	return (0);
 }
 
-#include <stdio.h>
-
 int	prog_keypress(int key, t_state *state)
 {
 	if (key == XK_Escape)
@@ -33,7 +31,6 @@ int	prog_keypress(int key, t_state *state)
 		fractol_zoom_in(state);
 	if (key == XK_KP_Subtract)
 		fractol_zoom_out(state);
-	// TODO: Protect overflow
 	state->iterations += ((key == XK_k) - (key == XK_j)) * 8;
 	state->render |= (key == XK_j || key == XK_k);
 	return (0);
@@ -41,10 +38,8 @@ int	prog_keypress(int key, t_state *state)
 
 int	prog_mousepress(int key, int x, int y, t_state *state)
 {
-	(void)x;
-	(void)y;
 	if (state->render == 1)
-		return (1);
+		return ((void)x, (void)y, 1);
 	if (key == XK_SCROLL_UP)
 		fractol_zoom_in(state);
 	if (key == XK_SCROLL_DOWN)

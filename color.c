@@ -6,7 +6,7 @@
 /*   By: aindjare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 11:40:20 by aindjare          #+#    #+#             */
-/*   Updated: 2024/06/10 12:03:37 by aindjare         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:00:01 by aindjare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_color	color_rgb(double h, double s, double l)
 {
 	double		q;
 	double		p;
-	t_color	color;
+	t_color		color;
 
 	if (s == 0.0)
 		return ((t_color){l, l, l, COLOR_RGB});
@@ -48,35 +48,6 @@ t_color	color_rgb(double h, double s, double l)
 		color.format = COLOR_RGB;
 	}
 	return (color);
-}
-
-t_color color_hsl(double r, double g, double b)
-{
-	double		v_max;
-	double		v_min;
-	double		delta;
-	t_color color;
-
-	v_max = math_max((double[]){ r, g, b }, 3);
-	v_min = math_min((double[]){ r, g, b }, 3);
-	color.x = (v_max + v_min) / 2.0;
-	color.y = (v_max + v_min) / 2.0;
-	color.z = (v_max + v_min) / 2.0;
-	if (v_max == v_min)
-		return ((t_color){0.0, 0.0, color.z, COLOR_HSL});
-	delta = v_max - v_min;
-	if (color.z > 0.5)
-		color.y = delta / (2.0 - delta);
-	else
-		color.y = delta / color.y;
-	if (v_max == r)
-		color.x = (g - b) / delta + ((g < b) * 6.0);
-	if (v_max == g)
-		color.x = (b - r) / delta + 2.0;
-	if (v_max == b)
-		color.x = (r - g) / delta + 4.0;
-	color.x /= 6.0;
-	return ((t_color){color.x, color.y, color.z, COLOR_HSL});
 }
 
 unsigned int	color_mlx(t_color in_col)

@@ -6,13 +6,13 @@
 /*   By: aindjare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 10:20:22 by aindjare          #+#    #+#             */
-/*   Updated: 2024/06/10 12:00:44 by aindjare         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:12:51 by aindjare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBRARY_H
 # define LIBRARY_H
-# define SCREEN 640
+# define SCREEN 960
 # define PALETTE 32
 # define ZOOM_MIN 0.5
 # define ZOOM_MAX 1024.0
@@ -59,8 +59,8 @@ typedef enum e_color_format
 typedef struct s_color
 {
 	double			x;
-	double 			y;
-	double 			z;
+	double			y;
+	double			z;
 	t_color_format	format;
 }	t_color;
 
@@ -91,6 +91,7 @@ void			destroy_image(void *mlx, void *win, void *img);
 int				prog_args(const int argc, const char **argv);
 int				prog_args_usage(const char *name, int flag);
 int				prog_close(t_state *state);
+int				prog_entry(const char **argv, const int mode);
 int				prog_keypress(int key, t_state *state);
 int				prog_mousepress(int key, int x, int y, t_state *state);
 double			math_max(double *list, int elem_count);
@@ -98,4 +99,5 @@ double			math_min(double *list, int elem_count);
 t_color			color_hsl(double r, double g, double b);
 t_color			color_rgb(double h, double s, double l);
 unsigned int	color_mlx(t_color in_col);
+double			ease_out_quad(double x);
 #endif

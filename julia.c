@@ -6,7 +6,7 @@
 /*   By: aindjare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:48:57 by aindjare          #+#    #+#             */
-/*   Updated: 2024/06/10 13:10:01 by aindjare         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:06:49 by aindjare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,15 @@ t_complex	math_julia(double x, double y, double p, double q)
 	return (complex_new(real, imag));
 }
 
-double	ease_out_quad(double x)
-{
-	return (1 - (1 - x) * (1 - x));
-}
-
 unsigned int	pixel_color_julia(double idx, double max)
 {
+	double			components[3];
 	t_color			col_hsl;
 
-	(void)idx;
-	(void)max;
-	col_hsl = color_rgb(0.00 + (idx / max), 1.0 - ease_out_quad(idx / max) / 2, ease_out_quad(idx / max));
+	components[0] = 0.00 + (idx / max);
+	components[1] = 1.0 - ease_out_quad(idx / max) / 2;
+	components[2] = ease_out_quad(idx / max);
+	col_hsl = color_rgb(components[0], components[1], components[2]);
 	return (color_mlx(col_hsl));
 }
 

@@ -6,7 +6,7 @@
 /*   By: aindjare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:41:39 by aindjare          #+#    #+#             */
-/*   Updated: 2024/06/10 13:14:03 by aindjare         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:11:16 by aindjare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,16 @@ t_state	state_new(void)
 	return (state);
 }
 
-#include <stdio.h>
+unsigned int	state_get_pixel_color(t_state *state, int x, int y)
+{
+	double	_x;
+	double	_y;
+
+	_x = (double)x / state->zoom + state->offset.real;
+	_y = (double)y / state->zoom + state->offset.imag;
+	return (state->render_pixel(state, _x, _y));
+}
+
 int	state_render(t_state *state)
 {
 	int				x;
@@ -42,7 +51,7 @@ int	state_render(t_state *state)
 		{
 			pixel = image_pixel_at(state->img, x, y);
 			if (pixel)
-				*pixel = state->render_pixel(state, (double)x / state->zoom + state->offset.real, (double)y / state->zoom + state->offset.imag);
+				*pixel = state_get_pixel_color(state, x, y);
 			else
 				return (1);
 			x++;
