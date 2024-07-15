@@ -6,7 +6,7 @@
 #    By: aindjare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/05 20:09:58 by aindjare          #+#    #+#              #
-#    Updated: 2024/07/15 12:13:26 by aindjare         ###   ########.fr        #
+#    Updated: 2024/07/15 12:18:42 by aindjare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all: $(NAME)
 lib/mlx/libmlx.a lib/mlx/libmlx_Linux.a:
 	mkdir -p lib
 	git clone 'https://github.com/42Paris/minilibx-linux' lib/mlx --depth=1
-	$(MAKE) --no-print-directory -C lib/mlx
+	$(MAKE) -C lib/mlx
 
 $(NAME): $(DEP_MLX) $(OBJECTS)
 	$(CC) $(CFLAGS)	-o $@ $(OBJECTS) $(LFLAGS)
